@@ -25,10 +25,17 @@ include("lowlevel/Formats.jl")   # Done
 include("lowlevel/Types.jl")     # Done
 include("lowlevel/Device.jl")
 include("lowlevel/Modules.jl")
+include("lowlevel/Logger.jl")
 include("typemap.jl")
 include("highlevel.jl")
+include("loghandler.jl")
 
 const SDRStream = Stream
 export SDRStream
+
+function __init__()
+    julia_log_handler = @cfunction(logger_soapy2jl, Cvoid, (Cint, Cstring))
+    SoapySDR_registerLogHandler(julia_log_handler)
+end
 
 end
