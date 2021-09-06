@@ -9,8 +9,8 @@ using Unitful
 using Unitful.DefaultSymbols
 
 # SoapySDR modules in Yggdrasil
-using SoapyLMS7_jll
-#using SoapyRTLSDR_jll
+#using SoapyLMS7_jll
+using SoapyRTLSDR_jll
 #using SoapyUHD_jll
 #using xtrx_jll
 
