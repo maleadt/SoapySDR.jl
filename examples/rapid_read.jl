@@ -1,6 +1,6 @@
 using SoapySDR, SoapyRTLSDR_jll
 
-#using CUDA
+using CUDA
 
 # Here we want to test the behavior in a loop, to ensure
 # that we can block on buffer overflow conditions, and
@@ -11,7 +11,7 @@ function rapid_read()
     rx_chan = dev.rx
     rx_stream = SoapySDR.Stream(rx_chan)
     SoapySDR.activate!(rx_stream)
-    bufs = [SoapySDR.SampleBuffer(rx_stream, 10^6) for i = 1:2]
+    bufs = [SoapySDR.SampleBuffer(rx_stream, 10^6; vectortype=CuVector) for i = 1:2]
     @show bufs[1], typeof(bufs[1])
     @show bufs[1].packet_count
     @show bufs[2].packet_count
